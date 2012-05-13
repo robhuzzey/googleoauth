@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Google OAuth test</title>
+	</head>
+	
+	<body>
+	
+		<h1>Google Oauth login test</h1>
+		
+		<a href="#" class="login">Login with google</a>
+		
+		<button class="userInfo">User Info</button>
+		
+		
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="google.config"></script><!-- Just a config file to hide up info on github -->
+		<script>
+			
+			$(function() {
+				
+				var googleOAuth = {
+					"endPoint" : "https://accounts.google.com/o/oauth2/auth",
+					"params" : {
+						"response_type" : "token",
+						"client_id" : google.client_id,
+						"redirect_uri" : "http://localhost/googleoauth/",
+						"scope" : "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
+						"state" : "Can be anything I like here"
+					}
+				};
+				
+				var url = googleOAuth.endPoint + '?';
+				
+				for( var k in googleOAuth.params ) {
+					url += k + '=' + encodeURIComponent( googleOAuth.params[k] ) + '&';
+				}
+				
+				$('.login').attr( 'href', url );				
+				
+				// First, parse the query string
+				var params = {}, queryString = location.hash.substring(1),
+				    regex = /([^&=]+)=([^&]*)/g, m;
+				while (m = regex.exec(queryString)) {
+				  params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+				}				
+				
+				$('.userInfo').click(function( e ) {
+					
+					console.log( params );
+					
+					$.ajax({
+						url : 'https://www.googleapis.com/oauth2/v1/userinfo', 
+						data : { 
+							access_token : params.access_token + 'ww'
+						},
+						dataType : 'json',
+						success : function( data ) {
+							console.log( data );
+						},
+						error : function( data ) {
+							console.log( 'fail' );
+							console.log( data );
+						}
+					});
+					
+					
+					e.preventDefault();
+				});
+				
+				
+				
+				
+			});
+		
+		
+		</script>
+		
+		
+	</body>
+	
+</html>
