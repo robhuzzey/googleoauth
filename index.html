@@ -12,10 +12,11 @@
 		
 		<button class="userInfo">User Info</button>
 		
+		<br />
 		
+		<p>You will need to look at the javascript console to see responses, I didn't bother to 'alert' etc ;)</p>		
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="google.config"></script><!-- Just a config file to hide up info on github -->
 		<script>
 			
 			$(function() {
@@ -24,10 +25,10 @@
 					"endPoint" : "https://accounts.google.com/o/oauth2/auth",
 					"params" : {
 						"response_type" : "token",
-						"client_id" : google.client_id,
-						"redirect_uri" : "http://localhost/googleoauth/",
+						"client_id" : "302916425747-1g93b23smpd4h9rb203ifvnhagk7lmdk.apps.googleusercontent.com",
+						"redirect_uri" : "http://robhuzzey.github.com/googleoauth/",
 						"scope" : "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email",
-						"state" : "Can be anything I like here"
+						"state" : "Can be anything you like here"
 					}
 				};
 				
